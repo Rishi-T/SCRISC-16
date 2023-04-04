@@ -6,7 +6,8 @@ module ALU_16b(
     input [15:0] a,
     input [15:0] b,
     input [3:0] ALUC,
-    input [2:0] ALUB
+    input [1:0] ALUB,
+    input Unsig
     );
     
     wire [15:0] dA0,dA1,dB0,dB1,A0,A1,A2,A3,B0,B1,B2,B3,m1,m2;
@@ -30,7 +31,7 @@ module ALU_16b(
     CCLA_16b cla(o3,cout,A3,B3,ALUC[0]);
     
     assign zero = ~|(a ^ b);
-    BranchUnit branch(check,ALUB,a[15],b[15],o3[15],cout,zero);
+    BranchUnit branch(check,ALUB,Unsig,a[15],b[15],o3[15],cout,zero);
     
     mux_2x1_16b mux1(m1,o0,o1,ALUC[2]);
     mux_2x1_16b mux2(m2,o2,o3,ALUC[2]);

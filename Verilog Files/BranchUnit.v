@@ -1,7 +1,8 @@
 `timescale 1ns / 1ps
 module BranchUnit(
     output check,
-    input [2:0] ALUB,
+    input [1:0] ALUB,
+    input Unsig,
     input msba,
     input msbb,
     input msbout,
@@ -14,8 +15,8 @@ module BranchUnit(
     assign overflow = (~msba | msbb | cout) | (msba | ~msbb | ~cout);
     assign blt = overflow ^ msbout;
     
-    assign set0 = ALUB[0] ? cout : blt;
-    assign set1 = ALUB[2] ? set0 : zero;
-    assign check = ALUB[1] ^ set1;
+    assign set0 = Unsig ? cout : blt;
+    assign set1 = ALUB[1] ? set0 : zero;
+    assign check = ALUB[0] ^ set1;
     
 endmodule
