@@ -1,5 +1,5 @@
 # SCRISC-16
-SCRISC-16 is a 16-bit processor based on a fully custom instruction set architecture (ISA), inspired by RISC-V.
+SCRISC-16 is a 16-bit, single-cycle processor based on a fully custom instruction set architecture (ISA), inspired by RISC-V.
 - All instructions are 2 Bytes wide
 - The processor has 4 general-purpose registers - r0 (00), r1 (01), r2 (10) & r3 (11)
 - *opcode* field specifies the operation to be performed. It also implicitly specifies the instruction format
