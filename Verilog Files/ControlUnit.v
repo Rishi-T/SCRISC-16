@@ -7,6 +7,8 @@ module ControlUnit(
     output ALUSrc,
     output Branch,
     output Jump,
+    output Direct,
+    output RegZero,
     output MemRead,
     output MemtoReg,
     output RegWrite,
@@ -14,14 +16,15 @@ module ControlUnit(
     input [4:0] opcode
     );
     
-    wire Rtype, direct;
+    wire Rtype;
     
     assign Rtype = &(opcode);
-    assign direct = ~|(opcode[4:2]);
     
     assign ALUSrc = ~Rtype;
     assign Branch = opcode[4] & ~opcode[3];
     assign Jump = ~|(opcode) | ~opcode[4] & opcode[3] & ~opcode[2];
+    assign Direct = ~|(opcode[4:2]);
+    assign RegZero = ~opcode[1] & opcode[0];
     assign MemRead = ~opcode[4] & ~opcode[3] & opcode[2];
     assign MemtoReg = MemRead;
     assign RegWrite = ~(opcode[4] & (~opcode[3] | opcode[3] & ~opcode[2]));
@@ -32,6 +35,6 @@ module ControlUnit(
       
     assign ALUB = {opcode[3],opcode[1],opcode[0]}; // {btype,binv,bunsig}
     
-    assign ImmOp = {direct & opcode[0], Jump | Branch, direct}; // {sll7,sll1,imm7/9}
+    assign ImmOp = {Direct & opcode[0], Jump | Branch, Direct}; // {sll7,sll1,imm7/9}
     
 endmodule
