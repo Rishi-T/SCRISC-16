@@ -19,7 +19,7 @@ module DataMem(
         ReadData = {mem[Address+1], mem[Address]};
     end
     
-    always@(negedge clk, posedge reset)
+    always@(posedge clk, posedge reset)
     begin
     if(reset)
         $readmemh("DataMemory.mem",mem);

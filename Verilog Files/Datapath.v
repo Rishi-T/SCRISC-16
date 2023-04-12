@@ -8,7 +8,7 @@ module Datapath(
     wire [15:0] Instr,RsDat1,RsDat2,RdDat,Imm,ALUOut,ReadData,WriteData,PCIncr,PCNext,BranchAddr;
     wire [15:0] wr1,wr2,ldbyte,lddat;
     wire [3:0] ALUC;
-    wire [2:0] ImmOp;
+    wire [3:0] ImmOp;
     wire [1:0] ALUB,ALUOp;
     wire ALUSrc,Branch,Unsig,Jump,Direct,RegZero,MemRead,BH,MemtoReg,RegWrite,MemWrite,PCSrc,Check;
     
@@ -35,7 +35,7 @@ module Datapath(
     
     assign WriteData = BH ? RsDat2 : {8'b0,RsDat2[7:0]};
     
-    assign ldbyte = {{4{~Unsig & ReadData[15]}},ReadData[7:0]};
+    assign ldbyte = {{8{~Unsig & ReadData[7]}},ReadData[7:0]};
     assign lddat = BH ? ReadData : ldbyte;
     assign wr1 = MemtoReg ? lddat : ALUOut;
     assign wr2 = Jump ? PCIncr : wr1;

@@ -4,8 +4,8 @@ module bar_shift_16b(
     output [15:0] out,
     input [15:0] in,
     input [4:0] sh,
-    input cont,
-    input sign
+    input sign,
+    input cont
     );
     
     wire [15:0] li,lo,ri,ro;

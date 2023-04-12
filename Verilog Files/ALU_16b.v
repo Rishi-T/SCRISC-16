@@ -28,7 +28,7 @@ module ALU_16b(
     assign o0 = 16'h0000;
     bar_shift_16b bsh(o1,A1,B1,ALUC[1],ALUC[0]);
     bitwise_16b bw(o2,A2,B2,ALUC[1:0]);
-    CCLA_16b cla(o3,cout,A3,B3,ALUC[0]);
+    CCLA_16b cla(o3,cout,A3,binp,ALUC[0]);
     
     assign zero = ~|(a ^ b);
     BranchUnit branch(check,ALUB,Unsig,a[15],b[15],o3[15],cout,zero);

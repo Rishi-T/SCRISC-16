@@ -12,7 +12,7 @@ module BranchUnit(
     
     wire overflow,blt,set0,set1;
     
-    assign overflow = (~msba | msbb | cout) | (msba | ~msbb | ~cout);
+    assign overflow = (~msba & msbb & msbout) | (msba & ~msbb & ~msbout);
     assign blt = overflow ^ msbout;
     
     assign set0 = Unsig ? cout : blt;

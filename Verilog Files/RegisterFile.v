@@ -19,7 +19,7 @@ module RegisterFile(
         $readmemh("RegisterValues.mem",Register);
     end
     
-    always@(negedge clk)
+    always@(posedge clk)
     begin
     if (RegWrite)
         Register[Wr] <= WriteData;
